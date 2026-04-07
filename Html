@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scoreboard 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #040814;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            /* Prism Live में फुल स्क्रीन के लिए */
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            border: 2px solid #ff007f; /* आउटर बॉर्डर */
+        }
+
+        /* टॉप हेडर (Total, Highest, Lowest) */
+        .top-stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0a0f25;
+            padding: 10px 0;
+            border-bottom: 2px solid #1a2342;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stat-box {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .stat-title { color: #f1c40f; font-size: 0.9rem; letter-spacing: 1px; }
+        .stat-value { font-family: 'Roboto Mono', monospace; font-size: 1.5rem; }
+
+        .color-cyan { color: #00e5ff; }
+        .color-green { color: #00ff66; }
+        .color-red { color: #ff3366; }
+        .color-yellow { color: #ffeb3b; }
+        .color-purple { color: #d500f9; }
+
+        /* मेन स्कोरबोर्ड टेबल */
+        .scoreboard-wrapper {
+            padding: 10px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            color: #f1c40f;
+            padding: 12px;
+            border-bottom: 2px solid #1a2342;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #11182c;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #080c1d;
+        }
+
+        .rank {
+            color: #ffffff;
+            font-family: 'Roboto Mono', monospace;
+            width: 50px;
+        }
+
+        .name-col {
+            text-align: left;
+            font-size: 1.3rem;
+        }
+
+        .score-col {
+            color: #00e5ff;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.4rem;
+        }
+
+        /* स्टेटस बैज (Safe, Doubtful) */
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+
+        .safe {
+            background-color: rgba(0, 255, 102, 0.1);
+            color: #00ff66;
+            border-color: #00ff66;
+        }
+
+        .doubtful {
+            background-color: rgba(255, 51, 102, 0.1);
+            color: #ff3366;
+            border-color: #ff3366;
+        }
+
+        .wait {
+            background-color: rgba(241, 196, 15, 0.1);
+            color: #f1c40f;
+            border-color: #f1c40f;
+        }
+        
+        .cat-col { color: #ffffff; }
+        .zone-col { color: #8b9bb4; font-size: 1rem; }
+
+        /* मेडल आइकॉन (Text Based) */
+        .medal { font-size: 1.2rem; margin-right: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-stats">
+        <div class="stat-box">
+            <div class="stat-title">Total</div>
+            <div class="stat-value color-cyan">105</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-title">Highest</div>
+            <div class="stat-value color-green">81</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-title">Lowest</div>
+            <div class="stat-value color-red">17</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-title">Average</div>
+            <div class="stat-value color-yellow">55.15</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-title">Above Avg</div>
+            <div class="stat-value color-purple">66</div>
+        </div>
+    </div>
+
+    <div class="scoreboard-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th style="text-align: left;">Name</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Cat</th>
+                    <th>Zone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="rank">1</td>
+                    <td class="name-col"><span class="medal">🥇</span>@MohitSingh_Raj</td>
+                    <td class="score-col">69.71</td>
+                    <td><span class="status-badge safe">🏆 100% SAFE</span></td>
+                    <td class="cat-col">SC</td>
+                    <td class="zone-col">Raw</td>
+                </tr>
+                <tr>
+                    <td class="rank">2</td>
+                    <td class="name-col"><span class="medal">🥈</span>@sarveshmaurya</td>
+                    <td class="score-col">52.39</td>
+                    <td><span class="status-badge doubtful">? DOUBTFUL</span></td>
+                    <td class="cat-col">OBC</td>
+                    <td class="zone-col">Ranchi</td>
+                </tr>
+                <tr>
+                    <td class="rank">3</td>
+                    <td class="name-col"><span class="medal">🥉</span>@mayursen2729</td>
+                    <td class="score-col">65.00</td>
+                    <td><span class="status-badge safe">✅ SAFE ✨</span></td>
+                    <td class="cat-col">OBC</td>
+                    <td class="zone-col">Mechanical</td>
+                </tr>
+                <tr>
+                    <td class="rank">4</td>
+                    <td class="name-col">@samtop55</td>
+                    <td class="score-col">70.00</td>
+                    <td><span class="status-badge safe">✅ SAFE ✨</span></td>
+                    <td class="cat-col">OBC</td>
+                    <td class="zone-col">Gorakhpur</td>
+                </tr>
+                <tr>
+                    <td class="rank">5</td>
+                    <td class="name-col">@vishalkumar</td>
+                    <td class="score-col">56.00</td>
+                    <td><span class="status-badge wait">⚠️ MAY BE SAFE</span></td>
+                    <td class="cat-col">SC</td>
+                    <td class="zone-col">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // यह स्क्रिप्ट बाद में Google Sheets से लाइव डेटा जोड़ने के काम आएगी
+        // अभी के लिए यह सिर्फ पेज को हर 30 सेकंड में रिफ्रेश करेगी ताकि अगर आप 
+        // कोड में कोई नाम बदलें तो वो स्ट्रीम पर लाइव अपडेट हो जाए।
+        setTimeout(function(){
+            location.reload();
+        }, 30000); // 30000 ms = 30 seconds
+    </script>
+
+</body>
+</html>
